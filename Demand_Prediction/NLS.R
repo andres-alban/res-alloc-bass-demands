@@ -12,9 +12,25 @@ run_and_predict_NLS = function(){
   
   estim_res = estimate_nls(train_clusters = train_clusters,train_visits = train_visits,
                            validation = 0,  seed=seed)
+  
   prediction = predict_nls(test_clusters = test_clusters,test_visits=test_visits,
                          train_visits = train_visits,
                          r_coefs = estim_res$r_coefs, p_coefs = estim_res$p_coefs, q_coefs = estim_res$q_coefs, c_coefs = estim_res$c_coefs)
+  hist(prediction - test_visits$demand,breaks=100)
+  temp = true_parameters[true_parameters$cluster_id %in% test_clusters$cluster_id,]
+  reg_matrix = as.matrix(test_clusters[,!colnames(test_clusters) %in% c("cluster_id","visits_to_cluster","training_visits","m_factor","beta","pop_size_b0","pop_size_b1","pop_size_b2","pop_size_b3")])
+  reg_matrix = cbind(rep(1,nrow(reg_matrix)),reg_matrix)
+  reg_matrix[is.na(reg_matrix)] = 0
+  param_pred_r = (reg_matrix %*% estim_res$r_coefs)[,1]
+  param_pred_m = test_clusters$m_factor * (test_clusters$pop_size_b0 + test_clusters$pop_size_b1*param_pred_r + test_clusters$pop_size_b2*param_pred_r^2 + test_clusters$pop_size_b3*param_pred_r^3)
+  param_pred_p = (reg_matrix %*% estim_res$p_coefs)[,1]
+  param_pred_q = (reg_matrix %*% estim_res$q_coefs)[,1]
+  param_pred_c = (reg_matrix %*% estim_res$c_coefs)[,1]
+  hist(param_pred_r*120 - temp$r*120,breaks=100)
+  hist(param_pred_m - temp$m,breaks=100)
+  hist(param_pred_p - temp$p,breaks=100)
+  hist(param_pred_q - temp$q,breaks=100)
+  hist(param_pred_c - temp$c,breaks=100)
   save(estim_res, prediction, file = "Results_NLS_Ex_1.RData")
 }
 

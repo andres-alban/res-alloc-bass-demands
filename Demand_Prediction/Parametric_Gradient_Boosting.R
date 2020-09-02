@@ -19,6 +19,13 @@ run_and_predict_P = function(){
   prediction = predict_p(test_clusters = test_clusters,test_visits=test_visits,
                          test_cluster_predictions = estim_res$test_cluster_predictions,
                          train_visits = train_visits)
+  hist(prediction$visit_prediction - test_visits$demand,breaks=100)
+  temp = true_parameters[true_parameters$cluster_id %in% test_clusters$cluster_id,]
+  hist(prediction$cluster_prediction$r*120 - temp$r*120,breaks=100)
+  hist(prediction$cluster_prediction$m - temp$m,breaks=100)
+  hist(prediction$cluster_prediction$p - temp$p,breaks=100)
+  hist(prediction$cluster_prediction$q - temp$q,breaks=100)
+  hist(prediction$cluster_prediction$c - temp$c,breaks=100)
   save(estim_res, prediction, file = "Results_PGB_Ex_1.RData")
 }
 
@@ -41,7 +48,7 @@ test_parameters = function(train_clusters,train_visits,return_clusters = NULL,se
     k = c(0.2),
     shrinkage = c(0.1),
     validation = c(0.2),
-    n_trees = 100,
+    n_trees = 15000,
     sample = c(0.7,0.8), 
     min_split = c(10,20,30), 
     max_depth = c(4,8,12), 
