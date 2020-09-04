@@ -48,8 +48,8 @@ test_parameters = function(train_clusters,train_visits,return_clusters = NULL,se
     k = c(0.2),
     shrinkage = c(0.1),
     validation = c(0.2),
-    n_trees = 15000,
-    sample = c(0.7,0.8), 
+    n_trees = 8000,
+    sample = c(0.6,0.8), 
     min_split = c(10,20,30), 
     max_depth = c(4,8,12), 
     cp = c(0.01),
@@ -83,7 +83,7 @@ test_parameters = function(train_clusters,train_visits,return_clusters = NULL,se
 
 estimate_p = function(train_clusters,train_visits,seed,hyper_grid=NULL,return_models=FALSE,return_clusters=NULL,keep_cores_free = 1,
                       r0=4/120,p0=0.001,q0=0.1,c0=400,rho=15000,eps=0.2,k=0.2,shrinkage=0.1,validation = 0,
-                      n_trees=12000,sample=0.8,min_split=20,max_depth=6,cp=0.01){
+                      n_trees=12000,sample=0.8,min_split=20,max_depth=4,cp=0.01){
   
   # Run grid in parallel, or run one iteration with standard settings otherwise
   if(!is.null(hyper_grid)){

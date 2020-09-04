@@ -61,8 +61,8 @@ test_parameters = function(train_clusters, train_visits,seed = 123){
   
   # Gather results
   for(i in 1:nrow(hyper_grid)) {
-    hyper_grid$train_MSE[i] = estim_res[[i]]$train_MSE
-    hyper_grid$validation_MSE[i] = estim_res[[i]]$validation_MSE
+    hyper_grid$train_MSE[i] = estim_res_list[[i]]$train_MSE
+    hyper_grid$validation_MSE[i] = estim_res_list[[i]]$validation_MSE
   }
   
   # see the results for the tests
@@ -72,7 +72,7 @@ test_parameters = function(train_clusters, train_visits,seed = 123){
 # Estimation procedure
 estimate_nls = function(train_clusters,
                         train_visits,
-                        starting_coefs = list(r0 = 5/120,p0 = 0.001,q0 = 0.1,c0=250),
+                        starting_coefs = list(r0 = 3/120,p0 = 0.001,q0 = 0.001,c0=250),
                         starting_correction = 0.02,
                         starting_constraints = c(-7/120,1/120,0,0,0),
                         optim_params=list(tol=1e-16,max_iter=5000),
