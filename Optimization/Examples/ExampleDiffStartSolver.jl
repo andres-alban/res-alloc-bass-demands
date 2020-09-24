@@ -1,6 +1,5 @@
 using Random
-include("../SumBassSolver.jl")
-using .SumBassSolver
+using SumBassSolver
 
 Random.seed!(121)
 n=50

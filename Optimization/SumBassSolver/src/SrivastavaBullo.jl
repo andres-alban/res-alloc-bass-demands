@@ -29,16 +29,16 @@ end
 This function evaluates the linear program relaxation of the maximization of the
 sum of Bass functions.
 """
-function FLP(lambda,p,q,m,c0,alpha,F,T,Pi::Number)
+function FLP(lambda,p,q,m,c0,alpha,F,T,Pi::Real)
     n = length(p)
     Pi_eff = Pi - sum(F)
     f = Vector{Function}(undef,n)
-    df = Vector{Function}(undef,n)
-    df_inv = Vector{Function}(undef,n)
-    z = Vector{Float64}(undef,n)
+    # df = Vector{Function}(undef,n)
+    # df_inv = Vector{Function}(undef,n)
+    # z = Vector{Float64}(undef,n)
     for i in 1:n
         f[i] = t -> alpha[i]*Bass(t,p[i],q[i],m[i],c0[i])
-        df_inv[i] = lambda -> Bass_derivative_inverse(lambda/alpha[i],p[i],q[i],m[i],c0[i])[1]
+        # df_inv[i] = lambda -> Bass_derivative_inverse(lambda/alpha[i],p[i],q[i],m[i],c0[i])[1]
     end
 
     df_invs = [Bass_derivative_inverse(lambda/alpha[i],p[i],q[i],m[i],c0[i])[1] for i in 1:n]

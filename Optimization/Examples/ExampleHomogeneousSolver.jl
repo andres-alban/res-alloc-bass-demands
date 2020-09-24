@@ -1,5 +1,4 @@
-include("../SumBassSolver.jl")
-using .SumBassSolver
+using SumBassSolver
 
 p=0.001
 q=0.1

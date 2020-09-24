@@ -1,5 +1,4 @@
 # Solver for different starting points
-using Roots
 
 @doc raw"""
     sumBassDiffStartSolver(p,q,m,c0,alpha,F,T,Pi)

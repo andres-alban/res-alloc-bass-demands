@@ -1,5 +1,3 @@
-using SigmoidalProgramming
-using DataStructures
 
 @doc raw"""
     sumBassUB(p,q,m,c0,alpha,F,T,Pi)

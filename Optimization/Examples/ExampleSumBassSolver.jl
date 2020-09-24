@@ -1,5 +1,4 @@
-include("../SumBassSolver.jl")
-using .SumBassSolver
+using SumBassSolver
 using Random
 
 Random.seed!(121)
@@ -29,9 +28,3 @@ lambdas = Bass_derivative.(x,p,q,m,c0).*alpha
 i = findall(x -> abs(x-lambdas[1]) > 0.01,lambdas) # Sites at the boundary
 x[i]
 
-F=fill(10,50)
-Pi = 400
-x1,v1 = sumBassSolver(p,q,m,c0,alpha,F,T,Pi,localopt=true)
-
-Pi = 600
-x1,v1 = sumBassSolver(p,q[1],m,c0,alpha,F,T,Pi,localopt=true)

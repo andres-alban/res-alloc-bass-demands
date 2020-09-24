@@ -1,5 +1,4 @@
-include("../SumBassSolver.jl")
-using .SumBassSolver
+using SumBassSolver
 using Plots
 
 p=fill(0.001,2)

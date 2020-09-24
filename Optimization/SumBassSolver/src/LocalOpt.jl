@@ -1,4 +1,3 @@
-using JuMP, Ipopt
 
 @doc raw"""
     sumBassLocal(p,q,m,c0,alpha,F,T,Pi,xstart)
